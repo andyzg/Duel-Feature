@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <title>Real time game</title>
+                <script src="/socket.io/socket.io.js"></script>
+                <!--<script src="script.js"></script>-->
+                <script type="text/javascript">
+                var socket = io.connect('http://localhost');
+        
+                socket.on('promptuser', function(message) {
+                        var name = prompt(message, "Your Name");
+                        socket.emit('ready', name);
+                });
+        
+                socket.on('refreshstate', function(state, activeUsers) {
+                        var title = document.getElementById('title');
+                        title.innerHTML = state;
+
+                        var list = document.getElementById('list');
+                        for (var i=0; i<activeUsers.length; i++) {
+                                var name = document.createElement("p");
+                                name.innerHTML = activeUsers[i].name;
+                                list.appendChild(name);
+                        }
+                });
+                </script>
+                <link href="style/style.css" rel="stylesheet">
+        </head>
+        <body>
+                <div id="title">
+                </div>
+                <div id="list">
+                </div>
+        </body>
+</html>
