@@ -1,27 +1,5 @@
-<<<<<<< HEAD
+## Duel-Feature
 
+Main feature for a NodeJS project where multiple people can work through a series of problems. Link to the main repo where this feature is being built on: https://github.com/andyzg/Duel
 
-# Race
-
-
-
-## Usage
-
-
-
-## Developing
-
-
-
-### Tools
-
-Created with [Nodeclipse](https://github.com/Nodeclipse/nodeclipse-1)
- ([Eclipse Marketplace](http://marketplace.eclipse.org/content/nodeclipse), [site](http://www.nodeclipse.org))   
-
-Nodeclipse is free open-source project that grows with your contributions.
-=======
-Duel-Feature
-============
-
-Main feature soon to be implemented in Duel where users get to race through problems
->>>>>>> 2a83842eea839794fc9002e0012516fd6877e2d6
+Reason for a separate repo: Not extremely comfortable with AngularJS yet so I will build this feature on a completely different repo in order to get familiar with socket.io. One step at a time :)
