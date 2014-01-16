@@ -1,6 +1,9 @@
 // request handlers
 var handler = function(req, res) {
-	fs.readFile('./views/index.html', function(err, data) {
+	// console.log(req.url);
+	var filePath = req.url === '/' ? "./views/index.html" : "./views" + req.url;
+	console.log(filePath);
+	fs.readFile(filePath, function(err, data) {
 		if (err) {
 			res.writeHead(500);
 			return res.end('Sorry. Error loading the HTML :(');
@@ -22,13 +25,26 @@ var port = 3000;
 app.listen(port);
 
 io.sockets.on('connection', function(socket) {
-	var user;
+
+	var user = "";
 	var state = "Starting soon";
+	
+	var getMessage = function() {
+		if (user === null || user === "") {
+			return "Please enter a cool name";
+		}
+		else {
+			return "Sorry, there was an error. Try a cooler name";
+		}
+	};
+	
+	var message = getMessage();
 	
 	socket.emit('promptuser', message);
 	
 	socket.on('ready', function(name) {
 		if (game.isRepeat(name) || name == null) {
+			message = getMessage();
 			socket.emit('promptuser', message);
 			return;
 		}
@@ -57,14 +73,5 @@ io.sockets.on('connection', function(socket) {
 			return state = "In Progress";
 		}
 		return state = "Starting soon";
-	};
-	
-	var message = function() {
-		if (user === null) {
-			return "Please enter a cool name";
-		}
-		else {
-			return "Sorry, there was an error. Try a cooler name";
-		}
 	};
 });

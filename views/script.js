@@ -1,23 +1,23 @@
 window.onload = function() {
 	
 	var socket = io.connect('http://localhost');
-	
-	socket.on('promptuser', function(message) {
-		var name = prompt(message, "Your Name");
-		socket.emit('ready', name);
-	});
-	
-	socket.on('wait', function(state, activeUsers) {
-		var title = document.getElementById('title');
-		title.value = state;
-		
-		var list = document.getElementById('list');
-		for (var i=0; i<activeUsers.length; i++) {
-			var name = document.createElement("p");
-			name.value = activeUsers[i];
-			list.appendChild(name);
-		}
-	});
+    
+    socket.on('promptuser', function(message) {
+        var name = prompt(message, "Your Name");
+        socket.emit('ready', name);
+    });
+
+    socket.on('refreshstate', function(state, activeUsers) {
+        var title = document.getElementById('title');
+        title.innerHTML = state;
+
+        var list = document.getElementById('list');
+        for (var i=0; i<activeUsers.length; i++) {
+                var name = document.createElement("p");
+                name.innerHTML = activeUsers[i].name;
+                list.appendChild(name);
+        }
+    });
 /*
 var welcome = document.getElementById("welcome");
 var allUsers = document.getElementById("users");
